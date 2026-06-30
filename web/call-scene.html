@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Call scene</title>
+<link rel="stylesheet" href="/theme.css">
+<style>
+  body{margin:0}
+  .scene{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--bg);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:0 96px;box-sizing:border-box}
+  .hero-bg{position:absolute;inset:0}
+  .left{position:relative;z-index:2}
+  .eyebrow{font-family:var(--font-mono);font-size:20px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:22px}
+  .left h2{font-size:62px;line-height:1.06;letter-spacing:-.025em;margin:0 0 26px}
+  .left h2 em{font-style:normal;color:var(--hermes)}
+  .meta{display:flex;flex-direction:column;gap:14px;margin-top:30px}
+  .meta .m{display:flex;align-items:center;gap:13px;font-size:23px;color:var(--fg-muted)}
+  .meta .m b{color:var(--fg);font-weight:650}
+  .dotlive{width:14px;height:14px;border-radius:50%;background:var(--block);box-shadow:0 0 0 6px rgba(225,57,79,.16)}
+  .phone{position:relative;z-index:2;background:var(--surface);border:1px solid var(--border);border-radius:30px;box-shadow:var(--shadow-lg,0 30px 80px rgba(8,12,30,.18));padding:34px 30px;max-width:640px;justify-self:center;width:100%;box-sizing:border-box}
+  .phead{display:flex;align-items:center;gap:14px;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:22px}
+  .phead .av{width:46px;height:46px;border-radius:12px;background:var(--hermes);display:grid;place-items:center}
+  .phead .nm{font-weight:700;font-size:22px}
+  .phead .st{font-family:var(--font-mono);font-size:14px;color:var(--ok,#11a36b);margin-left:auto;display:flex;align-items:center;gap:8px}
+  .bubbles{display:flex;flex-direction:column;gap:15px}
+  .b{max-width:80%;padding:15px 19px;border-radius:18px;font-size:21px;line-height:1.4}
+  .b .who{display:block;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px;opacity:.6}
+  .b.disp{align-self:flex-start;background:var(--bg-subtle,#eef1f8);color:var(--fg);border-bottom-left-radius:5px}
+  .b.call{align-self:flex-end;background:var(--hermes);color:#fff;border-bottom-right-radius:5px}
+  .b.call .who{color:#cdd6ff}
+  /* entrance when played (recorded) */
+  .scene.play .left > *{opacity:0;animation:csUp .7s cubic-bezier(.22,1,.36,1) forwards}
+  .scene.play .left > *:nth-child(2){animation-delay:.12s}
+  .scene.play .left > *:nth-child(3){animation-delay:.24s}
+  .scene.play .phone{opacity:0;animation:csUp .8s cubic-bezier(.22,1,.36,1) .18s forwards}
+  .scene.play .bubbles .b{opacity:0;animation:csUp .5s cubic-bezier(.22,1,.36,1) forwards}
+  .scene.play .bubbles .b:nth-child(1){animation-delay:.5s}
+  .scene.play .bubbles .b:nth-child(2){animation-delay:.9s}
+  .scene.play .bubbles .b:nth-child(3){animation-delay:1.3s}
+  .scene.play .bubbles .b:nth-child(4){animation-delay:1.7s}
+  .scene.play .bubbles .b:nth-child(5){animation-delay:2.1s}
+  .scene.play .bubbles .b:nth-child(6){animation-delay:2.5s}
+  @keyframes csUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+</style></head>
+<body>
+<section class="scene" id="callscene">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="deco glabel" style="left:4%;top:12%">[ INBOUND ]</span>
+    <span class="deco glabel" style="left:4%;bottom:14%">[ AFTER-HOURS ]</span>
+  </div>
+  <div class="left">
+    <div class="eyebrow">Live call · the front door</div>
+    <h2>A homeowner calls.<br><em>The agent answers.</em></h2>
+    <div class="meta">
+      <div class="m"><span class="dotlive"></span> <b>9:42 PM</b> — office closed</div>
+      <div class="m">📞 Vapi voice line · <b>Hermes operator</b></div>
+      <div class="m">🌡️ AC failure · 94°F · <b>baby in the home</b></div>
+    </div>
+  </div>
+  <div class="phone">
+    <div class="phead">
+      <div class="av"><svg viewBox="0 0 48 48" width="28" height="28" fill="none"><path d="M18 16.5c-1.1 0-2 .9-2 2 0 7.7 6.3 14 14 14 1.1 0 2-.9 2-2v-3.1c0-1-.7-1.8-1.7-1.9l-3.2-.4c-.7-.1-1.3.1-1.8.6l-1 1c-2.2-1.2-4-3-5.2-5.2l1-1c.5-.5.7-1.1.6-1.8l-.4-3.2c-.1-1-.9-1.7-1.9-1.7H18z" fill="#fff"/></svg></div>
+      <div class="nm">Cedar Ridge HVAC</div>
+      <div class="st">● recording</div>
+    </div>
+    <div class="bubbles">
+      <div class="b call"><span class="who">Caller · Maya</span>My AC just died and it's 94 inside. We have a baby in the house. This is Maya Chen.</div>
+      <div class="b disp"><span class="who">Dispatcher</span>That's an emergency, Maya. What's the service address?</div>
+      <div class="b call"><span class="who">Caller · Maya</span>2148 Maple Avenue.</div>
+      <div class="b disp"><span class="who">Dispatcher</span>I'll send a $49 deposit to lock tonight's visit. Sound good?</div>
+      <div class="b call"><span class="who">Caller · Maya</span>Yes — please hurry.</div>
+    </div>
+  </div>
+</section>
+<script>
+  requestAnimationFrame(() => requestAnimationFrame(() =>
+    document.getElementById('callscene').classList.add('play')));
+</script>
+</body></html>

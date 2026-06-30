@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MissedCall Rescue — Call the dispatcher</title>
+<link rel="stylesheet" href="/theme.css">
+<style>
+  .call-wrap{max-width:760px;margin:0 auto;padding:56px 24px;text-align:center}
+  #callbtn{font-size:18px;padding:18px 30px;border-radius:999px;border:none;cursor:pointer;background:var(--hermes);color:#fff;font-weight:700;box-shadow:var(--shadow);transition:transform .15s,background .15s}
+  #callbtn:hover{transform:translateY(-2px)} #callbtn.live{background:var(--block)}
+  #status{margin-top:18px;font-family:var(--font-mono);color:var(--fg-muted);font-size:14px;min-height:20px}
+  #transcript{margin-top:28px;text-align:left;min-height:50px}
+  .dot-live{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--block);margin-right:7px;animation:blink 1s step-end infinite;vertical-align:middle}
+  .watch{margin-top:22px;display:inline-flex;gap:10px}
+</style></head>
+<body>
+<header class="topbar"><div class="wrap row"><div class="brandmark"><span class="dot"></span> MissedCall&nbsp;Rescue</div><div class="spacer"></div><div class="sponsors"><span class="chip nous"><i></i> Hermes</span><span class="chip nv"><i></i> Nemotron</span><span class="chip stripe"><i></i> Stripe</span></div></div></header>
+<main class="call-wrap">
+  <div class="eyebrow">Live web-call · real AI dispatcher</div>
+  <h1 style="font-size:clamp(2rem,5vw,3rem)">Call the after-hours dispatcher.</h1>
+  <p class="lede" style="margin:16px auto 26px">Allow your mic, then talk like a homeowner with an emergency. When the call ends, the real Hermes Agent (on Nemotron) takes over — triages, charges a $49 deposit, books the visit.</p>
+  <button id="callbtn">📞 Start call</button>
+  <div id="status">Ready. Click to call (mic permission required).</div>
+  <div class="watch"><a class="cta-ghost" href="/demo?callId=demo_live" target="_blank">Watch the agent work →</a></div>
+  <div class="transcript" id="transcript"></div>
+</main>
+<script type="module">
+  import Vapi from "https://esm.sh/@vapi-ai/web@2.5.2";
+	  const callConfig=globalThis.MISSEDCALL_RESCUE_CALL_CONFIG||{};
+	  const PUBLIC_KEY=callConfig.vapiPublicKey||"", ASSISTANT=callConfig.vapiAssistantId||"", CALL_ID=callConfig.callId||"demo_live";
+	  const vapi=PUBLIC_KEY?new Vapi(PUBLIC_KEY):null;
+	  const btn=document.getElementById("callbtn"), status=document.getElementById("status"), tx=document.getElementById("transcript");
+	  let live=false;
+	  const setStatus=(t,d=false)=>{status.innerHTML=(d?'<span class="dot-live"></span>':'')+t;};
+	  function addTurn(role,text){const agent=/assistant|agent/i.test(role);const el=document.createElement("div");el.className="turn "+(agent?"agent":"caller");el.innerHTML='<span class="who">'+(agent?"dispatcher":"you")+'</span>'+text;tx.appendChild(el);tx.scrollTop=tx.scrollHeight;}
+	  if(!vapi||!ASSISTANT){btn.disabled=true;btn.style.cursor="not-allowed";setStatus("Call demo is not configured for this deploy.");}
+	  btn.onclick=async()=>{ if(!vapi||!ASSISTANT)return; if(live){vapi.stop();return;} try{setStatus("Connecting…");await vapi.start(ASSISTANT,{variableValues:{callId:CALL_ID}});}catch(e){setStatus("Error: "+(e&&e.message||e));} };
+	  if(vapi){
+	    vapi.on("call-start",()=>{live=true;btn.textContent="■ End call";btn.classList.add("live");setStatus("Connected — start talking.",true);});
+	    vapi.on("call-end",()=>{live=false;btn.textContent="📞 Start call";btn.classList.remove("live");setStatus("Call ended — Hermes is taking over. Watch /demo?callId="+CALL_ID);});
+	    vapi.on("error",(e)=>{setStatus("Error: "+JSON.stringify(e).slice(0,160));});
+	    vapi.on("message",(m)=>{ if(m.type==="transcript"&&m.transcriptType==="final"){addTurn(m.role,m.transcript);} });
+	  }
+	</script>
+</body></html>

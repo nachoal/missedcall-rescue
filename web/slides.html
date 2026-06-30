@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MissedCall Rescue — slides</title>
+<link rel="stylesheet" href="/theme.css">
+<style>
+  body{margin:0}
+  .slide{width:1920px;height:1080px;position:relative;overflow:hidden;display:grid;place-items:center;text-align:center;background:var(--bg)}
+  .slide.dark{background:#070b18;color:#fff}
+  .inner{position:relative;z-index:2;max-width:1340px;padding:0 80px}
+  .logo-lockup{display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:34px}
+  .wordmark{font-size:84px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .tagline{font-family:var(--font-display);font-style:italic;font-size:46px;color:var(--hermes);margin-top:26px;letter-spacing:-.01em}
+  .eyebrow{font-family:var(--font-mono);font-size:21px;letter-spacing:.22em;text-transform:uppercase;color:var(--fg-faint);margin-bottom:26px}
+  h2{font-size:72px;line-height:1.05;letter-spacing:-.025em;margin:0 0 30px}
+  h2 em{font-style:normal;color:var(--hermes)}
+  .lede{font-size:33px;line-height:1.5;color:var(--fg-muted);max-width:1120px;margin:0 auto}
+  .lede b{color:var(--fg)}
+  .row{display:flex;gap:20px;justify-content:center;margin-top:46px;flex-wrap:wrap}
+  .chip{font-size:24px;padding:14px 26px;gap:11px}
+  .chip i{width:13px;height:13px}
+  .flow{display:flex;gap:18px;justify-content:center;margin-top:54px;flex-wrap:nowrap}
+  .step{flex:1;max-width:250px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:30px 22px;box-shadow:var(--shadow)}
+  .step .n{font-family:var(--font-mono);font-size:17px;color:var(--hermes);letter-spacing:.1em}
+  .step .t{font-size:27px;font-weight:650;margin-top:12px;letter-spacing:-.01em}
+  .step .d{font-size:18px;color:var(--fg-muted);margin-top:9px;line-height:1.4}
+  .arrow{align-self:center;color:var(--fg-faint);font-size:30px}
+  .stack{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;margin-top:50px;text-align:left}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:34px 38px;box-shadow:var(--shadow);position:relative}
+  .card .role{font-family:var(--font-mono);font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint)}
+  .card .name{font-size:38px;font-weight:700;margin-top:10px;letter-spacing:-.02em}
+  .card .desc{font-size:22px;color:var(--fg-muted);margin-top:12px;line-height:1.45}
+  .card.h{border-color:rgba(10,24,255,.4)} .card.h .name{color:var(--hermes)}
+  .card.n .name{color:#76b900} .card.s .name{color:#635bff} .card.g .name{color:#e0399a}
+  .subline{font-size:32px;line-height:1.5;color:var(--fg-muted);max-width:1080px;margin:0 auto}
+  .subline b{color:#fff}
+  .handle{font-family:var(--font-mono);color:var(--hermes);font-size:27px;margin-top:30px}
+  .pixwrap .pix,.pixwrap .spark{position:absolute}
+  /* cold-open — landing-style receipt cards with dither art, no edge bars */
+  .creceipts{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+  .crcard{background:var(--card);border:1px solid var(--border);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);text-align:left}
+  .crcard .cart{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;background:var(--hermes)}
+  .crcard .cbody{padding:28px 32px 34px}
+  .crcard .ck{font-family:var(--font-mono);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint)}
+  .crcard .cv{font-size:66px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-top:12px;color:var(--fg)}
+  .crcard.money .cv{color:var(--hermes)} .crcard.block .cv{color:var(--block)} .crcard.ok .cv{color:var(--ok)}
+  .crcard .cs{font-family:var(--font-mono);font-size:17px;color:var(--fg-muted);margin-top:14px}
+  .coldrun{font-family:var(--font-mono);font-size:22px;color:var(--fg-muted);margin-top:44px;letter-spacing:.02em}
+  #s_problem h2 em{font-style:normal;color:var(--hermes)}
+  /* install slide */
+  #s_install h2 em{font-style:normal;color:var(--hermes)}
+  .setup{display:grid;grid-template-columns:1fr 1fr;gap:24px 32px;margin-top:48px;text-align:left;max-width:1280px}
+  .setrow{display:flex;gap:22px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px 32px;box-shadow:var(--shadow)}
+  .setrow .check{flex:none;width:46px;height:46px;border-radius:13px;background:var(--hermes);color:#fff;display:grid;place-items:center;font-size:24px;font-weight:800}
+  .setrow .st{font-size:28px;font-weight:680;letter-spacing:-.015em}
+  .setrow .sd{font-size:18.5px;color:var(--fg-muted);margin-top:8px;line-height:1.45}
+  .roi-line{margin:42px auto 0;max-width:1160px;border:2px solid color-mix(in srgb,var(--hermes) 28%,transparent);background:var(--hermes-soft);border-radius:22px;padding:30px 38px;box-shadow:var(--shadow-lg)}
+  .roi-line .roi-main{font-size:54px;line-height:1.08;font-weight:760;letter-spacing:-.035em;color:var(--fg)}
+  .roi-line .roi-main b{color:var(--hermes)}
+  .roi-line .roi-sub{font-family:var(--font-mono);font-size:19px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-muted);margin-top:14px}
+  /* entrance animation when a slide is played (recorded) */
+  .slide .inner{opacity:1}
+  .slide.play .inner > *{opacity:0;animation:slideUp .75s cubic-bezier(.22,1,.36,1) forwards}
+  .slide.play .inner > *:nth-child(1){animation-delay:.06s}
+  .slide.play .inner > *:nth-child(2){animation-delay:.24s}
+  .slide.play .inner > *:nth-child(3){animation-delay:.42s}
+  .slide.play .inner > *:nth-child(4){animation-delay:.60s}
+  .slide.play .stack > *{opacity:0;animation:slideUp .7s cubic-bezier(.22,1,.36,1) forwards}
+  .slide.play .stack > *:nth-child(1){animation-delay:.40s}
+  .slide.play .stack > *:nth-child(2){animation-delay:.55s}
+  .slide.play .stack > *:nth-child(3){animation-delay:.70s}
+  .slide.play .stack > *:nth-child(4){animation-delay:.85s}
+  .slide.play .flow > *{opacity:0;animation:slideUp .6s cubic-bezier(.22,1,.36,1) forwards}
+  .slide.play .flow > *:nth-child(odd){animation-delay:.5s}
+  .slide.play .flow > *:nth-child(even){animation-delay:.62s}
+  .slide.play .creceipts > *{opacity:0;animation:slideUp .7s cubic-bezier(.22,1,.36,1) forwards}
+  .slide.play .creceipts > *:nth-child(1){animation-delay:.34s}
+  .slide.play .creceipts > *:nth-child(2){animation-delay:.50s}
+  .slide.play .creceipts > *:nth-child(3){animation-delay:.66s}
+  .slide.play .setup > *{opacity:0;animation:slideUp .65s cubic-bezier(.22,1,.36,1) forwards}
+  .slide.play .setup > *:nth-child(1){animation-delay:.30s}
+  .slide.play .setup > *:nth-child(2){animation-delay:.42s}
+  .slide.play .setup > *:nth-child(3){animation-delay:.54s}
+  .slide.play .setup > *:nth-child(4){animation-delay:.66s}
+  @keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+</style></head>
+<body>
+
+<!-- ============ 01 TITLE ============ -->
+<section class="slide" id="s_title">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="deco glabel" style="left:7%;top:14%">[ 200 OK ]</span>
+    <span class="deco glabel" style="right:7%;top:14%">[ $49.00 ]</span>
+    <span class="deco glabel" style="left:7%;bottom:16%">[ POLICY.YAML ]</span>
+    <span class="deco glabel" style="right:7%;bottom:16%">[ .LEDGER ]</span>
+    <svg class="deco spark" width="30" height="30" viewBox="0 0 24 24" style="left:24%;top:20%"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+    <svg class="deco spark" width="22" height="22" viewBox="0 0 24 24" style="right:25%;top:24%"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+  </div>
+  <div class="inner">
+    <div class="logo-lockup">
+      <svg viewBox="0 0 48 48" width="86" height="86" fill="none"><rect x="3" y="3" width="42" height="42" rx="12" fill="var(--hermes)"/><path d="M18 16.5c-1.1 0-2 .9-2 2 0 7.7 6.3 14 14 14 1.1 0 2-.9 2-2v-3.1c0-1-.7-1.8-1.7-1.9l-3.2-.4c-.7-.1-1.3.1-1.8.6l-1 1c-2.2-1.2-4-3-5.2-5.2l1-1c.5-.5.7-1.1.6-1.8l-.4-3.2c-.1-1-.9-1.7-1.9-1.7H18z" fill="#fff"/><path d="M31 15.5a8 8 0 0 1 4.6 4.6M31.5 11a12 12 0 0 1 7.2 7.2" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span class="wordmark">MissedCall&nbsp;Rescue</span>
+    </div>
+    <div class="tagline">After-hours jobs, booked and paid — by an agent.</div>
+    <div class="row">
+      <span class="chip nous"><i></i> Nous&nbsp;Hermes</span>
+      <span class="chip nv"><i></i> NVIDIA&nbsp;Nemotron</span>
+      <span class="chip stripe"><i></i> Stripe</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 WHAT IT IS ============ -->
+<section class="slide" id="s_what">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="eyebrow">The missed-call problem</div>
+    <h2>An agent that <em>answers, charges, and books</em><br>the calls you can't pick up.</h2>
+    <div class="flow">
+      <div class="step"><div class="n">01</div><div class="t">Answers</div><div class="d">Picks up the after-hours emergency call</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">02</div><div class="t">Triages</div><div class="d">Reasons about urgency &amp; risk</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">03</div><div class="t">Gets paid</div><div class="d">Collects a $49 deposit via Stripe</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="n">04</div><div class="t">Books &amp; guards</div><div class="d">Books the visit, spends only in policy</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 TECH STACK ============ -->
+<section class="slide" id="s_stack">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="eyebrow">Built on the sponsors' stack — all load-bearing</div>
+    <div class="stack">
+      <div class="card h"><div class="role">The brain · orchestrator</div><div class="name">Nous Hermes Agent</div><div class="desc">The real Hermes CLI runs the operation — skills, tools, memory.</div></div>
+      <div class="card n"><div class="role">The reasoning model</div><div class="name">NVIDIA Nemotron</div><div class="desc">nemotron-3-ultra triages every call and decides the next action.</div></div>
+      <div class="card s"><div class="role">Real money</div><div class="name">Stripe</div><div class="desc">Live deposits in, policy-capped spend out — every cent on Stripe rails.</div></div>
+      <div class="card g"><div class="role">Safety &amp; proof</div><div class="name">Policy gate + ledger</div><div class="desc">Off-policy spend blocked 403; a hash-chained ledger proves it.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 00 COLD OPEN (receipts first) ============ -->
+<section class="slide" id="s_cold">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="deco glabel" style="left:6%;top:12%">[ 200 OK ]</span>
+    <span class="deco glabel" style="right:6%;top:12%">[ $49.00 ]</span>
+    <span class="deco glabel" style="left:6%;bottom:13%">[ POLICY.YAML ]</span>
+    <span class="deco glabel" style="right:6%;bottom:13%">[ .LEDGER ]</span>
+    <svg class="deco spark" width="26" height="26" viewBox="0 0 24 24" style="left:15%;top:24%"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+    <svg class="deco spark" width="18" height="18" viewBox="0 0 24 24" style="right:16%;top:28%;animation-delay:1.1s"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+  </div>
+  <div class="inner" style="max-width:1480px">
+    <div class="eyebrow">One after-hours call · real Stripe test rails · real Hermes run</div>
+    <div class="creceipts">
+      <div class="crcard money"><img class="cart" src="/assets/steps/paid.png" alt=""><div class="cbody"><div class="ck">Deposit collected</div><div class="cv">$49.00</div><div class="cs">Stripe · pi_3Tns…CPF5a</div></div></div>
+      <div class="crcard block"><img class="cart" src="/assets/steps/blocked.png" alt=""><div class="cbody"><div class="ck">Off-policy spend</div><div class="cv">403</div><div class="cs">$400 ads · blocked</div></div></div>
+      <div class="crcard ok"><img class="cart" src="/assets/steps/safe.png" alt=""><div class="cbody"><div class="ck">Hash-chained ledger</div><div class="cv">Verified ✓</div><div class="cs">tamper-evident</div></div></div>
+    </div>
+    <div class="coldrun">Hermes run · hermes-adafe702 · nvidia/nemotron-3-ultra-550b</div>
+  </div>
+</section>
+
+<!-- ============ 02 PROBLEM ============ -->
+<section class="slide" id="s_problem">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="eyebrow">The missed-call problem</div>
+    <h2>The call you can't answer<br>is the <em>job you just lost.</em></h2>
+    <div class="roi-line">
+      <div class="roi-main"><b>5 missed emergency calls / week</b> ≈ thousands in booked work, gone.</div>
+      <div class="roi-sub">Every unanswered ring becomes a competitor's invoice.</div>
+    </div>
+    <div class="lede" style="margin-top:28px">After-hours, home-services businesses send emergencies to voicemail — and the customer just dials the next number. MissedCall Rescue picks up.</div>
+  </div>
+</section>
+
+<!-- ============ INSTALL — switch it on tonight ============ -->
+<section class="slide" id="s_install">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="deco glabel" style="left:6%;top:13%">[ FORWARD ]</span>
+    <span class="deco glabel" style="right:6%;top:13%">[ $49 ]</span>
+    <span class="deco glabel" style="left:6%;bottom:14%">[ SPEND CAP ]</span>
+    <span class="deco glabel" style="right:6%;bottom:14%">[ CAL.COM ]</span>
+  </div>
+  <div class="inner" style="max-width:1360px">
+    <div class="eyebrow">Productionizable · the owner stays in control</div>
+    <h2>Switch it on <em>tonight.</em></h2>
+    <div class="setup">
+      <div class="setrow"><span class="check">✓</span><div><div class="st">Forward your after-hours line</div><div class="sd">Calls route to the agent the moment you close.</div></div></div>
+      <div class="setrow"><span class="check">✓</span><div><div class="st">Set the deposit &amp; spend cap</div><div class="sd">$49 deposit · agent spend hard-capped to your allowlist.</div></div></div>
+      <div class="setrow"><span class="check">✓</span><div><div class="st">Connect your calendar &amp; service area</div><div class="sd">Cal.com booking · jobs only where you work.</div></div></div>
+      <div class="setrow"><span class="check">✓</span><div><div class="st">Get a proof receipt after every call</div><div class="sd">Hash-chained ledger · you see exactly what it did.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 CLOSE ============ -->
+<section class="slide dark" id="s_close">
+  <div class="hero-bg" aria-hidden="true" style="opacity:.5">
+    <svg class="deco spark" width="26" height="26" viewBox="0 0 24 24" style="left:30%;top:26%"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+  </div>
+  <div class="inner">
+    <div class="logo-lockup">
+      <svg viewBox="0 0 48 48" width="68" height="68" fill="none"><rect x="3" y="3" width="42" height="42" rx="12" fill="var(--hermes)"/><path d="M18 16.5c-1.1 0-2 .9-2 2 0 7.7 6.3 14 14 14 1.1 0 2-.9 2-2v-3.1c0-1-.7-1.8-1.7-1.9l-3.2-.4c-.7-.1-1.3.1-1.8.6l-1 1c-2.2-1.2-4-3-5.2-5.2l1-1c.5-.5.7-1.1.6-1.8l-.4-3.2c-.1-1-.9-1.7-1.9-1.7H18z" fill="#fff"/><path d="M31 15.5a8 8 0 0 1 4.6 4.6M31.5 11a12 12 0 0 1 7.2 7.2" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <span class="wordmark" style="font-size:60px">MissedCall&nbsp;Rescue</span>
+    </div>
+    <div class="subline">An agent that <b>earns, spends, and runs a real operation</b> — safely.<br>A business could switch it on tonight.</div>
+    <div class="row">
+      <span class="chip nous"><i></i> Nous&nbsp;Hermes</span>
+      <span class="chip nv"><i></i> NVIDIA&nbsp;Nemotron</span>
+      <span class="chip stripe"><i></i> Stripe</span>
+    </div>
+    <div class="handle">@NousResearch · live proof at /proof</div>
+  </div>
+</section>
+
+<script>
+  // ?s=s_title|s_what|s_stack|s_close shows only that slide and plays its entrance
+  const only = new URLSearchParams(location.search).get('s');
+  const slides = [...document.querySelectorAll('.slide')];
+  if (only) slides.forEach(el => { el.style.display = (el.id === only) ? 'grid' : 'none'; });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    slides.forEach(el => { if (el.style.display !== 'none') el.classList.add('play'); });
+  }));
+</script>
+</body></html>

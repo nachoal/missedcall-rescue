@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MissedCall Rescue — title cards</title>
+<link rel="stylesheet" href="/theme.css">
+<style>
+  html{scroll-snap-type:y mandatory}
+  .card-slide{min-height:100vh; display:grid; place-items:center; position:relative; overflow:hidden; scroll-snap-align:start; text-align:center}
+  .card-inner{position:relative; z-index:1; max-width:760px; padding:0 28px}
+  .logo-lockup{display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:30px}
+  .logo-lockup .mark{filter:drop-shadow(0 8px 22px rgba(10,24,255,.28))}
+  .wordmark{font-size:clamp(2.6rem,7vw,4.6rem); font-weight:700; letter-spacing:-.03em; line-height:1}
+  .tagline{font-family:var(--font-display); font-style:italic; font-size:clamp(1.3rem,3.2vw,2rem); color:var(--hermes); margin-top:18px; letter-spacing:-.01em}
+  .subline{color:var(--fg-muted); font-size:clamp(1rem,2vw,1.2rem); margin-top:18px; line-height:1.5}
+  .lockup-row{display:flex; gap:10px; justify-content:center; margin-top:34px; flex-wrap:wrap}
+  .lockup-row .chip{font-size:13px; padding:7px 13px}
+  .badge-line{font-family:var(--font-mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-faint); margin-top:30px}
+  .handle{font-family:var(--font-mono); color:var(--hermes); font-size:1.05rem; margin-top:18px}
+  .url{font-family:var(--font-mono); color:var(--fg-faint); font-size:13.5px; margin-top:8px}
+  .anim{opacity:0; animation:fade-up .8s var(--ease) forwards}
+  .anim.a1{animation-delay:.1s}.anim.a2{animation-delay:.28s}.anim.a3{animation-delay:.46s}.anim.a4{animation-delay:.64s}
+</style>
+</head>
+<body>
+
+<!-- ============ OPEN CARD ============ -->
+<section class="card-slide">
+  <div class="hero-bg" aria-hidden="true">
+    <span class="deco glabel" style="left:6%;top:12%">[ 200 OK ]</span>
+    <span class="deco glabel" style="right:6%;top:12%">[ $49.00 ]</span>
+    <span class="deco glabel" style="left:6%;bottom:14%">[ POLICY.YAML ]</span>
+    <span class="deco glabel" style="right:6%;bottom:14%">[ .LEDGER ]</span>
+    <svg class="deco pix" width="34" height="34" viewBox="0 0 36 36" fill="#0a0c16" style="left:16%;top:30%"><rect x="0" y="8" width="8" height="8"/><rect x="8" y="0" width="8" height="8"/><rect x="8" y="16" width="8" height="8"/><rect x="16" y="8" width="8" height="8"/><rect x="24" y="0" width="8" height="8"/><rect x="16" y="24" width="8" height="8"/></svg>
+    <svg class="deco pix" width="30" height="30" viewBox="0 0 32 32" fill="#0a0c16" style="right:15%;top:34%;animation-delay:1.2s"><rect x="8" y="0" width="8" height="8"/><rect x="0" y="8" width="8" height="8"/><rect x="16" y="8" width="8" height="8"/><rect x="8" y="16" width="8" height="8"/><rect x="16" y="24" width="8" height="8"/></svg>
+    <svg class="deco spark" width="22" height="22" viewBox="0 0 24 24" style="left:24%;top:18%"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+    <svg class="deco spark" width="17" height="17" viewBox="0 0 24 24" style="right:25%;top:22%;animation-delay:1.4s"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+  </div>
+  <div class="card-inner">
+    <div class="logo-lockup anim a1">
+      <svg class="mark" viewBox="0 0 48 48" width="60" height="60" fill="none" aria-hidden="true">
+        <rect x="3" y="3" width="42" height="42" rx="12" fill="var(--hermes)"/>
+        <path d="M18 16.5c-1.1 0-2 .9-2 2 0 7.7 6.3 14 14 14 1.1 0 2-.9 2-2v-3.1c0-1-.7-1.8-1.7-1.9l-3.2-.4c-.7-.1-1.3.1-1.8.6l-1 1c-2.2-1.2-4-3-5.2-5.2l1-1c.5-.5.7-1.1.6-1.8l-.4-3.2c-.1-1-.9-1.7-1.9-1.7H18z" fill="#fff"/>
+        <path d="M31 15.5a8 8 0 0 1 4.6 4.6M31.5 11a12 12 0 0 1 7.2 7.2" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark">MissedCall&nbsp;Rescue</span>
+    </div>
+    <div class="tagline anim a2">After-hours jobs, booked and paid — by an agent.</div>
+    <div class="lockup-row anim a3">
+      <span class="chip nous"><i></i> Nous&nbsp;Hermes</span>
+      <span class="chip nv"><i></i> NVIDIA&nbsp;Nemotron</span>
+      <span class="chip stripe"><i></i> Stripe</span>
+    </div>
+    <div class="badge-line anim a4">Hermes Agent · Accelerated Business Hackathon</div>
+  </div>
+</section>
+
+<!-- ============ CLOSE CARD ============ -->
+<section class="card-slide" id="close" style="background:var(--bg-subtle)">
+  <div class="hero-bg" aria-hidden="true" style="opacity:.7">
+    <svg class="deco spark" width="20" height="20" viewBox="0 0 24 24" style="left:30%;top:24%"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+    <svg class="deco spark" width="15" height="15" viewBox="0 0 24 24" style="right:30%;bottom:26%;animation-delay:1s"><path d="M12 0 C12.6 7.2 16.8 11.4 24 12 C16.8 12.6 12.6 16.8 12 24 C11.4 16.8 7.2 12.6 0 12 C7.2 11.4 11.4 7.2 12 0 Z" fill="var(--hermes)"/></svg>
+  </div>
+  <div class="card-inner">
+    <div class="logo-lockup">
+      <svg class="mark" viewBox="0 0 48 48" width="48" height="48" fill="none" aria-hidden="true">
+        <rect x="3" y="3" width="42" height="42" rx="12" fill="var(--hermes)"/>
+        <path d="M18 16.5c-1.1 0-2 .9-2 2 0 7.7 6.3 14 14 14 1.1 0 2-.9 2-2v-3.1c0-1-.7-1.8-1.7-1.9l-3.2-.4c-.7-.1-1.3.1-1.8.6l-1 1c-2.2-1.2-4-3-5.2-5.2l1-1c.5-.5.7-1.1.6-1.8l-.4-3.2c-.1-1-.9-1.7-1.9-1.7H18z" fill="#fff"/>
+        <path d="M31 15.5a8 8 0 0 1 4.6 4.6M31.5 11a12 12 0 0 1 7.2 7.2" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark" style="font-size:clamp(2rem,5vw,3.2rem)">MissedCall&nbsp;Rescue</span>
+    </div>
+    <div class="subline">An agent that <strong style="color:var(--fg)">earns, spends, and runs a real operation</strong> — safely. A business could turn it on tomorrow.</div>
+    <div class="lockup-row">
+      <span class="chip nous"><i></i> Nous&nbsp;Hermes</span>
+      <span class="chip nv"><i></i> NVIDIA&nbsp;Nemotron</span>
+      <span class="chip stripe"><i></i> Stripe</span>
+    </div>
+    <div class="handle">@NousResearch</div>
+    <div class="url">missedcall-rescue · live proof at /proof</div>
+  </div>
+</section>
+
+</body>
+</html>

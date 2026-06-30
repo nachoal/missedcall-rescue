@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proof Pack · demo_live_20260629_145046 — MissedCall Rescue</title>
+<link rel="stylesheet" href="./theme.css">
+</head>
+<body>
+
+<!--
+  Rendered by codex's proof route (GET /proof/:callId).
+  Replace tokens (HTML-escape text tokens; *_HTML / *_ROWS / *_JSON are pre-rendered).
+  Contract: web/brand.md. Do not inline styles in the backend — only token replacement.
+-->
+
+<header class="topbar">
+  <div class="wrap row">
+    <div class="brandmark"><span class="dot"></span> MissedCall&nbsp;Rescue</div>
+    <div class="spacer"></div>
+    <div class="sponsors">
+      <span class="chip nous"><i></i> Nous&nbsp;Hermes</span>
+      <span class="chip nv"><i></i> NVIDIA&nbsp;Nemotron</span>
+      <span class="chip stripe"><i></i> Stripe</span>
+    </div>
+    <span class="badge badge--ok" style="margin-left:6px">LEDGER VERIFIED</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">Proof Pack · demo_live_20260629_145046</div>
+    <h1>One missed call became a <span class="grad-money">booked, paid job</span> — with receipts.</h1>
+    <p class="lede">After-hours HVAC emergency. The agent qualified the caller, charged a deposit, booked the visit, made one controlled spend, and blocked an off-policy one — every step signed into a tamper-evident ledger.</p>
+    <div class="stats">
+      <div class="stat money reveal d1"><span class="edge"></span><div class="k">Deposit captured</div><div class="v">$49.00</div></div>
+      <div class="stat block reveal d2"><span class="edge"></span><div class="k">Off-policy spend blocked</div><div class="v">1 · 403</div></div>
+      <div class="stat safe reveal d3"><span class="edge"></span><div class="k">Ledger (9 events)</div><div class="v">Verified ✓</div></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <h2><span class="n">01</span> Voice call <span class="muted">· Vapi line · Hermes operator</span></h2>
+    <div class="card"><div class="body"><div class="transcript"><div class="turn agent"><span class="who">Agent - Hermes</span>Thanks for calling Cedar Ridge HVAC after hours. I can help book an emergency diagnostic.</div><div class="turn caller"><span class="who">Caller</span>Hi, our AC stopped cooling about an hour ago. It is 94 degrees inside and we have a baby here.</div><div class="turn agent"><span class="who">Agent - Hermes</span>I can help. What is your name and address?</div><div class="turn caller"><span class="who">Caller</span>Maya Torres, 2148 Maple Ave. We can do tonight after 6.</div><div class="turn agent"><span class="who">Agent - Hermes</span>I will send a $49 diagnostic deposit link and confirm the same-night appointment once it is paid.</div></div></div></div>
+  </section>
+
+  <section class="section reveal">
+    <h2><span class="n">02</span> Triage decision <span class="muted">· NVIDIA Nemotron-3-Ultra</span></h2>
+    <div class="card">
+      <div class="head"><span class="ico">🧠</span>
+        <div><div class="title">TriageDecision</div><div class="sub mono">hermes_run · hermes_remote_863ac7156fed7dd1 — Hermes called Nemotron and issued the decision</div></div>
+        <div class="spacer"></div><span class="badge badge--warn">emergency</span>
+      </div>
+      <div class="body"><pre class="pre">{
+  &quot;callId&quot;: &quot;demo_live_20260629_145046&quot;,
+  &quot;hermesRunId&quot;: &quot;hermes_remote_863ac7156fed7dd1&quot;,
+  &quot;vertical&quot;: &quot;hvac&quot;,
+  &quot;offer&quot;: &quot;emergency_ac_diagnostic&quot;,
+  &quot;urgency&quot;: &quot;emergency&quot;,
+  &quot;reasons&quot;: [
+    &quot;nemotron-triage&quot;
+  ],
+  &quot;depositAmountCents&quot;: 4900,
+  &quot;recommendedWindow&quot;: &quot;next available emergency dispatch window&quot;,
+  &quot;requiredFieldsMissing&quot;: [],
+  &quot;customerSummary&quot;: {
+    &quot;problem&quot;: &quot;AC is not cooling&quot;,
+    &quot;vulnerablePerson&quot;: true,
+    &quot;name&quot;: &quot;Maya Torres&quot;,
+    &quot;phone&quot;: &quot;+15551234567&quot;,
+    &quot;address&quot;: &quot;2148 Maple Ave&quot;
+  },
+  &quot;nextAction&quot;: &quot;send_deposit&quot;,
+  &quot;model&quot;: &quot;nvidia/nemotron-3-ultra-550b-a55b&quot;
+}</pre></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <h2><span class="n">03</span> Deposit <span class="muted">· Stripe Checkout (test mode)</span></h2>
+    <div class="card">
+      <div class="head"><span class="ico">💳</span><div class="title">$49.00 emergency diagnostic deposit</div><div class="spacer"></div><span class="badge badge--pay">CAPTURED</span></div>
+      <div class="body"><dl class="kv">
+        <dt>amount</dt><dd>$49.00 USD</dd>
+        <dt>payment_intent</dt><dd class="mono">not-captured-yet</dd>
+        <dt>delivery</dt><dd>SMS link → paid on customer's phone</dd>
+      </dl></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <h2><span class="n">04</span> Booking <span class="muted">· Cal.com</span></h2>
+    <div class="card"><div class="head"><span class="ico">📅</span><div class="title">Emergency HVAC Diagnostic</div><div class="spacer"></div><span class="badge badge--ok">CONFIRMED</span></div>
+      <div class="body"><dl class="kv">
+        <dt>when</dt><dd>Jun 30, 2026, 5:30 PM</dd>
+        <dt>booking_id</dt><dd class="mono">oHzgRtGCEJT7mJL9majb21</dd>
+      </dl></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <h2><span class="n">05</span> Controlled spend <span class="muted">· Stripe test rails · policy-allowed</span></h2>
+    <div class="card"><div class="head"><span class="ico">✅</span><div class="title">Customer-confirmation SMS</div><div class="spacer"></div><span class="badge badge--ok">ALLOWED · &lt;$10</span></div>
+      <div class="body"><dl class="kv">
+        <dt>vendor</dt><dd>comms_confirmations <span class="muted">(allowlisted)</span></dd>
+        <dt>amount</dt><dd>$0.50 USD</dd>
+        <dt>stripe auth</dt><dd class="mono">pi_3TnmA8JlEvlpsEGc1sYQBRTe</dd>
+        <dt>policy rule</dt><dd><span class="badge badge--ok">allow-small-comms</span></dd>
+      </dl></div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <h2><span class="n">06</span> Blocked spend <span class="muted">· NemoClaw policy · before any Stripe call</span></h2>
+    <div class="block-callout">
+      <div class="big">403</div>
+      <div>
+        <h3>Off-policy spend blocked</h3>
+        <div class="note">The agent attempted <span class="mono">google_ads · $400.00</span> to "promote the open slot." The deny-by-default policy stopped it at the proxy.</div>
+        <div class="note" style="margin-top:8px"><span class="muted">reason:</span> Marketing spend requires explicit owner approval and is off-allowlist for after-hours booking agent.</div>
+        <div class="nostripe">↳ no Stripe call was made · balance unchanged · agent never saw the credential</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal">
+    <h2><span class="n">07</span> Tamper-evident ledger <span class="muted">· SHA-256 hash chain</span></h2>
+    <div class="card">
+      <div class="body" style="padding:0; overflow:auto">
+        <table class="ledger">
+          <thead><tr><th>#</th><th>type</th><th>amount</th><th>stripe_id</th><th>policy</th><th>hash</th><th>prev</th></tr></thead>
+          <tbody><tr title="2026-06-29T20:50:47.166Z"><td>0</td><td>call.started</td><td>-</td><td class="mono">-</td><td><span class="pol-none">none</span></td><td class="hash">c9c364d1</td><td class="muted">00000000</td></tr><tr title="2026-06-29T20:50:47.168Z"><td>1</td><td>call.transcript.updated</td><td>-</td><td class="mono">-</td><td><span class="pol-none">none</span></td><td class="hash">e51afece</td><td class="muted">c9c364d1</td></tr><tr title="2026-06-29T20:52:12.506Z"><td>2</td><td>hermes.triage_decision.emitted</td><td>-</td><td class="mono">-</td><td><span class="pol-none">none</span></td><td class="hash">a5e96a41</td><td class="muted">e51afece</td></tr><tr title="2026-06-29T20:52:13.161Z"><td>3</td><td>deposit.checkout.created</td><td>$49.00</td><td class="mono">cs_test_a1RLQu9rSBWBfRvqyVvctk5xCSkKYJ1JBrL79oxqZzNVamVZDTZ611LADh</td><td><span class="pol-none">none</span></td><td class="hash">cb606e37</td><td class="muted">a5e96a41</td></tr><tr title="2026-06-29T20:52:13.163Z"><td>4</td><td>sms.deposit_link.sent</td><td>-</td><td class="mono">-</td><td><span class="pol-none">none</span></td><td class="hash">ec39b0b4</td><td class="muted">cb606e37</td></tr><tr title="2026-06-29T20:52:13.328Z"><td>5</td><td>deposit.payment_succeeded</td><td>$49.00</td><td class="mono">cs_test_a1RLQu9rSBWBfRvqyVvctk5xCSkKYJ1JBrL79oxqZzNVamVZDTZ611LADh</td><td><span class="pol-none">none</span></td><td class="hash">8c8db78c</td><td class="muted">ec39b0b4</td></tr><tr title="2026-06-29T20:52:16.204Z"><td>6</td><td>calendar.booking.created</td><td>-</td><td class="mono">-</td><td><span class="pol-none">none</span></td><td class="hash">ea7a7a30</td><td class="muted">8c8db78c</td></tr><tr title="2026-06-29T20:52:16.436Z"><td>7</td><td>spend.allowed_authorized</td><td>$0.50</td><td class="mono">pi_3TnmA8JlEvlpsEGc1sYQBRTe</td><td><span class="pol-allow">allow</span></td><td class="hash">47a13bf9</td><td class="muted">ea7a7a30</td></tr><tr title="2026-06-29T20:52:23.454Z"><td>8</td><td>spend.blocked</td><td>$400.00</td><td class="mono">-</td><td><span class="pol-deny">deny / 403</span></td><td class="hash">9eb5c161</td><td class="muted">47a13bf9</td></tr></tbody>
+        </table>
+        <div class="verify-bar">
+          <span class="badge badge--ok">CHAIN VERIFIED</span>
+          <span class="dim mono">9 events · recomputed hashes match · no gaps</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span class="mono">demo_live_20260629_145046</span><span class="muted">·</span>
+    <span>Hermes operator; Nemotron triage; Stripe Checkout and PaymentIntent test rails; Cal.com booking; policy.yaml 403; SHA-256 ledger.</span>
+    <span class="spacer" style="flex:1"></span>
+    <span class="muted">generated 2026-06-29T21:26:12.870Z</span>
+  </footer>
+
+</main>
+
+<script>
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

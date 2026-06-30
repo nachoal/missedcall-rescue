@@ -1,0 +1,53 @@
+# Public publish allow-list.
+# Ignore everything, then explicitly unignore only the files intended for GitHub.
+*
+!*/
+!.gitignore
+!README.md
+!.env.example
+!package.json
+!pnpm-lock.yaml
+!tsconfig.json
+!src/
+!src/**
+!web/
+!web/**
+
+# Local credentials and machine-specific config.
+.env*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.csr
+
+# Generated/private run artifacts.
+data/
+video/
+site/
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.nyc_output/
+tmp/
+temp/
+*.log
+*.sqlite
+*.sqlite3
+*.db
+.DS_Store
+
+# Internal notes, production briefs, and non-public task files.
+**/*BRIEF*.md
+**/*TASK*.md
+**/*RUNBOOK*.md
+**/HANDOFF*.md
+**/CLAUDE.md
+TELEPROMPTER.md
+policy.yaml
+scripts/
+tests/

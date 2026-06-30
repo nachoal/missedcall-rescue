@@ -300,6 +300,16 @@ function buildProofTokens(bundle: ProofBundle, themeLink = ""): Record<string, s
     stringAt(deposit, ["payment_intent_id"]) ??
     state?.stripePaymentIntentId ??
     "";
+  const checkoutSessionId =
+    stringAt(payment, ["sessionId"]) ??
+    stringAt(payment, ["session_id"]) ??
+    stringAt(payment, ["raw", "id"]) ??
+    stringAt(deposit, ["sessionId"]) ??
+    stringAt(deposit, ["session_id"]) ??
+    stringAt(deposit, ["raw", "id"]) ??
+    findLedgerStripeId(bundle.ledger.events, "deposit.payment_succeeded") ??
+    findLedgerStripeId(bundle.ledger.events, "deposit.checkout.created") ??
+    "";
   const spendStripeId =
     stringAt(spend, ["authorization", "stripeId"]) ??
     stringAt(spend, ["authorization", "authorizationId"]) ??
@@ -317,20 +327,32 @@ function buildProofTokens(bundle: ProofBundle, themeLink = ""): Record<string, s
       "hermesRunId",
     ]) ??
     "";
-  const depositCaptured = Boolean(payment) || ["paid", "booked", "complete"].includes(String(state?.status ?? ""));
+  const proofTitle = `Proof Pack · ${bundle.callId} — MissedCall Rescue`;
+  const proofDescription =
+    "SHA-256 ledger, CHAIN VERIFIED — recompute MissedCall Rescue's test-mode Stripe and policy-gated HVAC run yourself.";
+  const canonicalPath = bundle.callId === "demo_final" ? "/proof" : `/proof/${bundle.callId}`;
+  const canonicalUrl = `https://rescuemissedcall.com${canonicalPath}`;
+  const ogImageUrl = "https://rescuemissedcall.com/assets/og.png";
 
   return {
     CALL_ID: textToken(bundle.callId),
     GENERATED_AT: textToken(bundle.generatedAt),
     PROOF_JSON: jsonForHtml(bundle),
+    LEDGER_RAW_JSON: jsonForHtml(bundle.ledger.events),
     PROOF_CONTENT: renderProofContent(bundle),
     THEME_LINK: themeLink,
     TOKENS: "tokens",
+    PROOF_TITLE: textToken(proofTitle),
+    PROOF_DESCRIPTION: textToken(proofDescription),
+    CANONICAL_URL: textToken(canonicalUrl),
+    OG_IMAGE_URL: textToken(ogImageUrl),
     HERMES_RUN_ID: textToken(hermesRunId || "not-recorded"),
     TRANSCRIPT: textToken(bundle.transcript ?? ""),
     DEPOSIT_AMOUNT: textToken(formatMoney(depositAmountCents)),
-    DEPOSIT_STATUS: textToken(depositCaptured ? "CAPTURED" : "PENDING"),
+    DEPOSIT_STATUS: textToken("STRIPE TEST MODE"),
     STRIPE_PI_ID: textToken(paymentIntentId || "not-captured-yet"),
+    STRIPE_CHECKOUT_SESSION_ID: textToken(checkoutSessionId || "not-created-yet"),
+    DEPOSIT_TEST_STATUS: textToken("test-mode · succeeded"),
     TRANSCRIPT_HTML: renderTranscriptHtml(bundle.transcript ?? ""),
     TRIAGE_JSON: textToken(JSON.stringify(triage ?? {}, null, 2)),
     TRIAGE_URGENCY: textToken(String(triage?.urgency ?? "routine")),

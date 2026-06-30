@@ -3,7 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Proof Pack · {{CALL_ID}} — MissedCall Rescue</title>
+<title>{{PROOF_TITLE}}</title>
+<meta name="description" content="{{PROOF_DESCRIPTION}}">
+<link rel="canonical" href="{{CANONICAL_URL}}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{CANONICAL_URL}}">
+<meta property="og:title" content="{{PROOF_TITLE}}">
+<meta property="og:description" content="{{PROOF_DESCRIPTION}}">
+<meta property="og:image" content="{{OG_IMAGE_URL}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{PROOF_TITLE}}">
+<meta name="twitter:description" content="{{PROOF_DESCRIPTION}}">
+<meta name="twitter:image" content="{{OG_IMAGE_URL}}">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="/theme.css">
 </head>
 <body>
@@ -21,6 +36,7 @@
     <div class="sponsors">
       <span class="chip nous"><i></i> Nous&nbsp;Hermes</span>
       <span class="chip nv"><i></i> NVIDIA&nbsp;Nemotron</span>
+      <span class="chip nv"><i></i> NVIDIA&nbsp;NemoClaw/OpenShell</span>
       <span class="chip stripe"><i></i> Stripe</span>
     </div>
     <span class="badge badge--ok" style="margin-left:6px">LEDGER VERIFIED</span>
@@ -31,10 +47,10 @@
 
   <section class="hero">
     <div class="eyebrow">Proof Pack · {{CALL_ID}}</div>
-    <h1>One missed call became a <span class="grad-money">booked, paid job</span> — with receipts.</h1>
-    <p class="lede">After-hours HVAC emergency. The agent qualified the caller, charged a deposit, booked the visit, made one controlled spend, and blocked an off-policy one — every step signed into a tamper-evident ledger.</p>
+    <h1>One missed call became a <span class="grad-money">booked job with a test-mode deposit</span> — with receipts.</h1>
+    <p class="lede">After-hours HVAC emergency. The agent qualified the caller, ran a Stripe test-mode deposit, booked the visit, made one controlled spend, and blocked an off-policy one — every step signed into a tamper-evident ledger.</p>
     <div class="stats">
-      <div class="stat money reveal d1"><span class="edge"></span><div class="k">Deposit captured</div><div class="v">{{DEPOSIT_AMOUNT}}</div></div>
+      <div class="stat money reveal d1"><span class="edge"></span><div class="k">Deposit collected · test rails</div><div class="v">{{DEPOSIT_AMOUNT}}</div></div>
       <div class="stat block reveal d2"><span class="edge"></span><div class="k">Off-policy spend blocked</div><div class="v">1 · 403</div></div>
       <div class="stat safe reveal d3"><span class="edge"></span><div class="k">Ledger ({{LEDGER_COUNT}} events)</div><div class="v">Verified ✓</div></div>
     </div>
@@ -62,7 +78,8 @@
       <div class="head"><span class="ico">💳</span><div class="title">{{DEPOSIT_AMOUNT}} emergency diagnostic deposit</div><div class="spacer"></div><span class="badge badge--pay">{{DEPOSIT_STATUS}}</span></div>
       <div class="body"><dl class="kv">
         <dt>amount</dt><dd>{{DEPOSIT_AMOUNT}} USD</dd>
-        <dt>payment_intent</dt><dd class="mono">{{STRIPE_PI_ID}}</dd>
+        <dt>checkout_session</dt><dd class="mono">{{STRIPE_CHECKOUT_SESSION_ID}}</dd>
+        <dt>status</dt><dd>{{DEPOSIT_TEST_STATUS}}</dd>
         <dt>delivery</dt><dd>SMS link → paid on customer's phone</dd>
       </dl></div>
     </div>
@@ -91,7 +108,7 @@
   </section>
 
   <section class="section reveal">
-    <h2><span class="n">06</span> Blocked spend <span class="muted">· NemoClaw policy · before any Stripe call</span></h2>
+    <h2><span class="n">06</span> Blocked spend <span class="muted">· policy.yaml gate · before any Stripe call</span></h2>
     <div class="block-callout">
       <div class="big">403</div>
       <div>
@@ -99,6 +116,18 @@
         <div class="note">The agent attempted <span class="mono">{{BLOCKED_VENDOR}} · {{BLOCKED_AMOUNT}}</span> to "promote the open slot." The deny-by-default policy stopped it at the proxy.</div>
         <div class="note" style="margin-top:8px"><span class="muted">reason:</span> {{BLOCKED_REASON}}</div>
         <div class="nostripe">↳ no Stripe call was made · balance unchanged · agent never saw the credential</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal sponsor-stack">
+    <h2>Sponsor stack — independently verifiable</h2>
+    <div class="card">
+      <div class="body stack-rows">
+        <div class="stack-row"><span class="badge badge--ok">NVIDIA Nemotron</span><div><strong class="mono">nvidia/nemotron-3-ultra-550b-a55b</strong><span class="muted"> · run </span><span class="mono">hermes-adafe702d5b2323d</span></div></div>
+        <div class="stack-row"><span class="badge badge--ok">NVIDIA NemoClaw / OpenShell 0.0.44</span><div><span class="mono">OPENSHELL_SANDBOX=1</span><span class="muted"> · egress probe </span><span class="mono">HTTP 403 {"error":"policy_denied"}</span><span class="muted"> · video/evidence/nemohermes-egress-denied-http-example.txt · video/evidence/nemohermes-sandbox-env.txt</span></div></div>
+        <div class="stack-row"><span class="badge badge--pay">Nous Hermes</span><div>Real CLI ran inside the sandbox: <span class="mono">bin: …/nemohermes:hermes-proof:hermes</span><span class="muted"> · app-real-nemoclaw-runHermesAgentTriage-schema.json</span></div></div>
+        <div class="stack-row"><span class="badge badge--pay">Stripe</span><div>Real test objects shown in-ledger: <span class="mono">cs_test_</span><span class="muted"> checkout session and </span><span class="mono">pi_</span><span class="muted"> PaymentIntent ids.</span></div></div>
       </div>
     </div>
   </section>
@@ -112,11 +141,31 @@
           <tbody>{{LEDGER_ROWS}}</tbody>
         </table>
         <div class="verify-bar">
-          <span class="badge badge--ok">CHAIN VERIFIED</span>
-          <span class="dim mono">{{LEDGER_COUNT}} events · recomputed hashes match · no gaps</span>
+          <span class="badge badge--ok" id="ledger-status-badge">CHAIN VERIFIED</span>
+          <span class="dim mono" id="ledger-status-line">{{LEDGER_COUNT}} events · recomputed hashes match · no gaps</span>
+        </div>
+        <div class="verify-legend">Money rails run in Stripe test mode — cs_test_/pi_ ids are real test objects.</div>
+      </div>
+    </div>
+    <div class="card ledger-self-check" aria-labelledby="ledger-self-check-title">
+      <div class="head">
+        <span class="ico">#</span>
+        <div><div class="title" id="ledger-self-check-title">Re-verify this ledger yourself</div><div class="sub mono">Browser SHA-256 · UTF-8 TextEncoder · sorted-key canonical JSON</div></div>
+      </div>
+      <div class="body">
+        <div class="verify-actions">
+          <button class="cta" type="button" id="verify-ledger">Re-verify in your browser →</button>
+          <label class="tamper-toggle"><input type="checkbox" id="tamper-ledger"> Tamper test <span class="mono">$49→$99</span></label>
+        </div>
+        <div class="verify-result mono" id="verify-result" aria-live="polite">Ready to recompute 9 ledger hashes locally.</div>
+        <div class="download-row">
+          <a class="cta-ghost" href="/assets/demo_final-ledger.json" download>Download ledger JSON</a>
+          <a class="cta-ghost" href="/assets/demo_final-events.jsonl" download>Download events.jsonl</a>
+          <code>pnpm demo:verify-ledger</code>
         </div>
       </div>
     </div>
+    <script type="application/json" id="ledger-raw">{{LEDGER_RAW_JSON}}</script>
   </section>
 
   <footer class="foot">
@@ -131,6 +180,127 @@
 <script>
   const io = new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script>
+  function canonicalize(value) {
+    if (value === undefined) {
+      return "null";
+    }
+
+    if (value === null || typeof value !== "object") {
+      return JSON.stringify(value) ?? "null";
+    }
+
+    if (Array.isArray(value)) {
+      return `[${value.map((item) => canonicalize(item)).join(",")}]`;
+    }
+
+    const record = value;
+    const entries = Object.keys(record)
+      .filter((key) => record[key] !== undefined)
+      .sort()
+      .map((key) => `${JSON.stringify(key)}:${canonicalize(record[key])}`);
+    return `{${entries.join(",")}}`;
+  }
+
+  async function sha256Hex(text) {
+    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+  }
+
+  function eventsForVerification() {
+    const raw = JSON.parse(document.getElementById("ledger-raw").textContent);
+    const events = Array.isArray(raw) ? raw : raw.events;
+    return events.map((event) => ({ ...event, payload: structuredClone(event.payload) }));
+  }
+
+  function renderedHashByIndex() {
+    const rows = document.querySelectorAll(".ledger tbody tr");
+    const map = new Map();
+    rows.forEach((row) => {
+      const cells = row.querySelectorAll("td");
+      if (cells.length >= 6) {
+        map.set(Number(cells[0].textContent.trim()), cells[5].textContent.trim());
+      }
+      row.classList.remove("ledger-row-ok", "ledger-row-bad");
+    });
+    return map;
+  }
+
+  function markLedgerRow(index, ok) {
+    const rows = document.querySelectorAll(".ledger tbody tr");
+    rows.forEach((row) => {
+      const first = row.querySelector("td");
+      if (Number(first?.textContent.trim()) === index) {
+        row.classList.add(ok ? "ledger-row-ok" : "ledger-row-bad");
+      }
+    });
+  }
+
+  async function verifyBrowserLedger() {
+    const tampered = document.getElementById("tamper-ledger").checked;
+    const events = eventsForVerification();
+    if (tampered) {
+      const target = events.find((event) => event.index === 38);
+      if (target) target.amount = 9900;
+    }
+
+    const rendered = renderedHashByIndex();
+    const mismatches = [];
+    let matched = 0;
+    let previousExpectedHash = null;
+    let previousIndex = null;
+
+    for (const event of events) {
+      const hashPayload = { ...event };
+      delete hashPayload.hash;
+      if (previousExpectedHash !== null) hashPayload.prev_hash = previousExpectedHash;
+
+      const expectedHash = await sha256Hex(canonicalize(hashPayload));
+      const renderedHash = rendered.get(event.index);
+      const hashOk = expectedHash === event.hash;
+      const renderedOk = typeof renderedHash === "string" && event.hash.startsWith(renderedHash);
+      const prevOk = previousExpectedHash === null || event.prev_hash === previousExpectedHash;
+      const indexOk = previousIndex === null || event.index === previousIndex + 1;
+      const ok = hashOk && renderedOk && prevOk && indexOk;
+
+      if (ok) {
+        matched += 1;
+      } else {
+        mismatches.push(`#${event.index}`);
+      }
+
+      markLedgerRow(event.index, ok);
+      previousExpectedHash = expectedHash;
+      previousIndex = event.index;
+    }
+
+    const badge = document.getElementById("ledger-status-badge");
+    const line = document.getElementById("ledger-status-line");
+    const result = document.getElementById("verify-result");
+    const total = events.length;
+    const mismatchCount = total - matched;
+
+    if (mismatchCount === 0) {
+      badge.className = "badge badge--ok";
+      badge.textContent = "CHAIN VERIFIED ✓";
+      line.textContent = `${matched}/${total} recomputed in your browser just now · 0 mismatches`;
+      result.className = "verify-result mono ok";
+      result.textContent = `GREEN ${matched}/${total}: full SHA-256 hashes match rendered rows and prev_hash links.`;
+      return { ok: true, matched, total, mismatches: [] };
+    }
+
+    badge.className = "badge badge--block";
+    badge.textContent = "CHAIN BROKEN";
+    line.textContent = `${matched}/${total} matched · ${mismatchCount} mismatch${mismatchCount === 1 ? "" : "es"}`;
+    result.className = "verify-result mono bad";
+    result.textContent = `${tampered ? "Tamper caught" : "Mismatch"}: ${mismatches.join(", ")} went red after recompute.`;
+    return { ok: false, matched, total, mismatches };
+  }
+
+  document.getElementById("verify-ledger").addEventListener("click", verifyBrowserLedger);
+  document.getElementById("tamper-ledger").addEventListener("change", verifyBrowserLedger);
+  verifyBrowserLedger();
 </script>
 </body>
 </html>

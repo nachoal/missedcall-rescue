@@ -3,7 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MissedCall Rescue — after-hours jobs, booked and paid by an agent</title>
+<title>MissedCall Rescue — after-hours jobs booked with Stripe test-mode proof</title>
+<meta name="description" content="MissedCall Rescue answers after-hours HVAC calls, triages emergencies, books the visit, and shows a tamper-evident Stripe test-mode proof ledger.">
+<link rel="canonical" href="https://rescuemissedcall.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rescuemissedcall.com/">
+<meta property="og:title" content="MissedCall Rescue — after-hours jobs booked with proof">
+<meta property="og:description" content="One missed HVAC call becomes a booked job with Stripe test-mode deposit evidence, policy-gated spend, and a browser-verifiable ledger.">
+<meta property="og:image" content="https://rescuemissedcall.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MissedCall Rescue — after-hours jobs booked with proof">
+<meta name="twitter:description" content="A browser-verifiable proof pack for the missed-call agent: Stripe test mode, 403 policy gate, SHA-256 ledger.">
+<meta name="twitter:image" content="https://rescuemissedcall.com/assets/og.png">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="/theme.css">
 </head>
 <body>
@@ -15,6 +30,7 @@
     <div class="sponsors">
       <span class="chip nous"><i></i> Nous&nbsp;Hermes</span>
       <span class="chip nv"><i></i> NVIDIA&nbsp;Nemotron</span>
+      <span class="chip nv"><i></i> NVIDIA&nbsp;NemoClaw/OpenShell</span>
       <span class="chip stripe"><i></i> Stripe</span>
     </div>
   </div>
@@ -66,10 +82,10 @@
       <section class="hero">
         <div class="eyebrow">Hermes Agent · Accelerated Business Hackathon</div>
         <h1 class="reveal in">Never lose another<br><em>after-hours job.</em></h1>
-        <p class="lede reveal in d1">MissedCall Rescue is an AI agent that answers your phone when you can't. It works out the emergency, <strong>collects a $49 deposit from the customer</strong>, and books the visit — so you wake up to booked, paid jobs instead of missed calls.</p>
+        <p class="lede reveal in d1">MissedCall Rescue is an AI agent that answers your phone when you can't. It works out the emergency, <strong>runs a $49 Stripe test-mode deposit in the demo</strong>, and books the visit — so a live account could wake up to booked jobs instead of missed calls.</p>
         <div class="cta-row reveal in d2">
           <a class="cta" href="#how">Talk to the agent <span class="ph">live web-call</span></a>
-          <a class="cta-ghost" href="/proof/demo_live_20260629_145046">See a real run →</a>
+          <a class="cta-ghost" href="/proof/demo_live_20260629_145046">See a test-mode proof run →</a>
         </div>
         <div class="trust reveal in d3">74% of after-hours service calls go unanswered · every dollar scoped, gated &amp; signed</div>
       </section>
@@ -80,10 +96,11 @@
 
     <section class="section" id="metrics">
       <div class="stats">
-        <div class="stat money reveal d1"><div class="v">$49</div><div class="k">Deposit collected from the customer, on the call — the job's paid for before you ring back.</div></div>
+        <div class="stat money reveal d1"><div class="v">$49</div><div class="k">Stripe test-mode deposit collected in the demo — the proof path is visible before you ring back.</div></div>
         <div class="stat reveal d2"><div class="v">24/7</div><div class="k">Every after-hours call answered in seconds, so you stop losing jobs to voicemail.</div></div>
         <div class="stat safe reveal d3"><div class="v">$0</div><div class="k">Surprise charges to you. What the agent spends to do its job is hard-capped and pre-approved.</div></div>
       </div>
+      <p class="roi-strip">Avg HVAC emergency ≈ $450 · ~5 missed after-hours calls/week · recover 2 → ~$3,900/mo the voicemail was losing · the agent's own spend capped at pennies/call.</p>
     </section>
 
     <section class="section" id="how">
@@ -92,7 +109,7 @@
       <div class="steps">
         <div class="step reveal d1"><img class="art" src="/assets/steps/answer.png" alt=""><div class="step-body"><div class="num">01</div><div class="t">Answers</div><div class="d">Picks up every after-hours call in seconds and works out what's wrong.</div><span class="tag nous">Hermes</span></div></div>
         <div class="step reveal d2"><img class="art" src="/assets/steps/triage.png" alt=""><div class="step-body"><div class="num">02</div><div class="t">Sizes it up</div><div class="d">Works out how urgent it is and what to charge — in one quick, structured read.</div><span class="tag nv">Nemotron</span></div></div>
-        <div class="step reveal d3"><img class="art" src="/assets/steps/paid.png" alt=""><div class="step-body"><div class="num">03</div><div class="t">Collects the deposit</div><div class="d">Texts the customer a $49 deposit link and confirms the second they pay. Real money, not a maybe.</div><span class="tag stripe">Stripe</span></div></div>
+        <div class="step reveal d3"><img class="art" src="/assets/steps/paid.png" alt=""><div class="step-body"><div class="num">03</div><div class="t">Collects the deposit</div><div class="d">Texts the customer a $49 test-mode checkout link in the demo and records the Stripe object in the proof pack.</div><span class="tag stripe">Stripe</span></div></div>
         <div class="step reveal d4"><img class="art" src="/assets/steps/book.png" alt=""><div class="step-body"><div class="num">04</div><div class="t">Books the visit</div><div class="d">Drops the confirmed appointment straight onto your calendar the moment the deposit clears.</div><span class="tag nous">Cal.com</span></div></div>
         <div class="step reveal d4"><img class="art" src="/assets/steps/safe.png" alt=""><div class="step-body"><div class="num">05</div><div class="t">Can't overspend</div><div class="d">To do the job it pays for tiny things — a text, a lookup. Every purchase is capped and limited to vendors you approved. It can't spend a cent you didn't allow.</div><span class="tag nv">NemoClaw</span></div></div>
       </div>
@@ -102,8 +119,8 @@
       <h2 class="reveal">Built to be turned on.</h2>
       <p class="section-sub reveal">Not a flashy "autonomous company." A narrow operator a real business could switch on tomorrow.</p>
       <div class="card reveal"><div class="body" style="padding:28px">
-        <p style="font-size:1.15rem; line-height:1.6; color:var(--fg); margin:0">Under the hood, the real <strong>Hermes</strong> agent runs on <strong>NVIDIA Nemotron</strong>, sandboxed by <strong>NVIDIA's NemoClaw / OpenShell</strong> with a deny-by-default network policy that blocks any off-policy call. Deposits run through <strong>Stripe Checkout</strong>, so it never touches your raw card or bank details, and every spend is capped to vendors you pre-approved. Everything it does is written to a hash-chained, <strong>tamper-evident</strong> ledger you can audit line by line. You review the money it brought in — not a pile of tasks.<span class="caret"></span></p>
-        <div style="margin-top:22px"><a class="cta" href="/proof/demo_live_20260629_145046">See a real run, end to end →</a></div>
+        <p style="font-size:1.15rem; line-height:1.6; color:var(--fg); margin:0">Under the hood, the real <strong>Hermes</strong> agent runs on <strong>NVIDIA Nemotron</strong>, sandboxed by <strong>NVIDIA's NemoClaw / OpenShell</strong> with a deny-by-default network policy that blocks any off-policy call. The demo deposit runs through <strong>Stripe Checkout test mode</strong>, so it never touches raw card or bank details, and every agent spend is capped to vendors you pre-approved. Everything it does is written to a hash-chained, <strong>tamper-evident</strong> ledger you can audit line by line. You review the booked job and proof trail — not a pile of tasks.<span class="caret"></span></p>
+        <div style="margin-top:22px"><a class="cta" href="/proof/demo_live_20260629_145046">See the test-mode proof, end to end →</a></div>
       </div></div>
     </section>
 
